@@ -1,0 +1,15 @@
+DELIMITER ;;
+    CREATEPROCEDUREtest_insert()
+    BEGIN
+        declarei int;
+        seti = 1 ;
+        WHILE (i < 1000000) DO
+            INSERTINTOxttblog(`name`,title,`page`,`status`)
+                VALUES(CONCAT('xttblog_', i),
+                    CONCAT('xttblog_', i),
+                i, (SELECTFLOOR(RAND() * 2)));
+            seti = i + 1;
+        ENDWHILE;
+        commit;
+END;;
+CALL test_insert();
